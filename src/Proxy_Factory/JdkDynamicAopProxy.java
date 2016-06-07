@@ -1,6 +1,5 @@
-package Proxy;
+package Proxy_Factory;
 
-import Proxy_Factory.AdvisedSupport;
 import aopalliance.ReflectiveMethodInvocation;
 import org.aopalliance.intercept.MethodInterceptor;
 

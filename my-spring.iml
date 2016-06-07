@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/aopalliance.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/com.springsource.net.sf.cglib-2.2.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/com.springsource.org.aspectj.weaver-1.6.0.jar/com.springsource.org.aspectj.weaver-1.6.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/aopalliance.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/com.springsource.net.sf.cglib-2.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/com.springsource.org.aspectj.weaver-1.6.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

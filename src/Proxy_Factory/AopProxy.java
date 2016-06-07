@@ -1,4 +1,4 @@
-package Proxy;
+package Proxy_Factory;
 
 /**
  * 代理生成的顶层接口，定义了获取代理的方法

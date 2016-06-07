@@ -1,6 +1,5 @@
-package Proxy;
+package Proxy_Factory;
 
-import Proxy_Factory.AdvisedSupport;
 import aopalliance.ReflectiveMethodInvocation;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -12,11 +11,11 @@ import java.lang.reflect.Method;
  * 通过Cglib创建代理对象，不需要被代理的对象实现接口
  * Created by MiaoZhuang on 2016/6/3.
  */
-public class CglibAopProxy implements AopProxy, MethodInterceptor {
+public class Cglib2AopProxy implements AopProxy, MethodInterceptor {
 
     private AdvisedSupport advisedSupport;
 
-    public CglibAopProxy(AdvisedSupport advisedSupport) {
+    public Cglib2AopProxy(AdvisedSupport advisedSupport) {
         this.advisedSupport = advisedSupport;
     }
 

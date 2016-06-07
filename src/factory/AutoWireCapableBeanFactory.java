@@ -1,6 +1,5 @@
 package factory;
 
-import application_context.BeanFactoryAware;
 import bean_definition.BeanDefinition;
 import bean_definition.BeanReference;
 import bean_definition.PropertyValue;
@@ -37,10 +36,7 @@ public class AutoWireCapableBeanFactory extends AbstractBeanFactory {
      * 使用java的内省机制给bean中的属性赋值
      */
     public void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
-        //对AutoProxyCreater进行赋值
-        if (bean instanceof BeanFactoryAware) {
-            ((BeanFactoryAware) bean).setBeanFactory(this);
-        }
+
         PropertyValues propertyValues = beanDefinition.getPropertyValues();
         for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
             if (propertyValue.getObject() instanceof String) {

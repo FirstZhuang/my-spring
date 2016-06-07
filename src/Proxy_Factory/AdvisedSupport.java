@@ -15,10 +15,14 @@ public class AdvisedSupport {
 
     private MethodMatcher methodMatcher;
 
+    private DefaultAopProxyFactory defaultAopProxyFactory;
+
+
     public AdvisedSupport(TargetSource targetSource, MethodInterceptor methodInterceptor, MethodMatcher methodMatcher) {
         this.targetSource = targetSource;
         this.methodInterceptor = methodInterceptor;
         this.methodMatcher = methodMatcher;
+        defaultAopProxyFactory = new DefaultAopProxyFactory();
     }
 
     public TargetSource getTargetSource() {
@@ -31,5 +35,9 @@ public class AdvisedSupport {
 
     public MethodMatcher getMethodMatcher() {
         return methodMatcher;
+    }
+
+    public AopProxyFactory getDefaultAopProxyFactory() {
+        return defaultAopProxyFactory;
     }
 }

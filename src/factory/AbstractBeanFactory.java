@@ -1,5 +1,6 @@
 package factory;
 
+import application_context.BeanFactoryAware;
 import application_context.BeanPostProcessor;
 import bean_definition.BeanDefinition;
 
@@ -44,6 +45,11 @@ public abstract class AbstractBeanFactory implements BeanFactory {
      * @return
      */
     public Object initializeBean(Object bean, String beanDefinitionName) {
+        //初始化过程，设置自身所在的IOC容器
+        if (bean instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) bean).setBeanFactory(this);
+        }
+
         for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
             bean = beanPostProcessor.postProcessBeforeInitialization(bean, beanDefinitionName);
         }

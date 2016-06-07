@@ -1,9 +1,8 @@
 package application_context;
 
-import Proxy.CglibAopProxy;
-import Proxy.JdkDynamicAopProxy;
-import Proxy_Factory.AdvisedSupport;
+import Proxy_Factory.ProxyFactory;
 import Proxy_Factory.TargetSource;
+import aspect.AspectJExpressionPointcut;
 import aspect.AspectJExpressionPointcutAdvisor;
 import factory.AutoWireCapableBeanFactory;
 import factory.BeanFactory;
@@ -39,28 +38,14 @@ public class AspectJAwareAutoProxyCreater implements BeanPostProcessor, BeanFact
             return bean;
         }
 
-        if (bean.getClass().getInterfaces().length == 0) {
-            //获取所有的advisor，与当前bean进行匹配
-            List<Object> list = autoWireCapableBeanFactory.getBeanByType(AspectJExpressionPointcutAdvisor.class);
-            for (Object object : list) {
-                AspectJExpressionPointcutAdvisor aspectJExpressionPointcutAdvisor = (AspectJExpressionPointcutAdvisor) object;
-                if (aspectJExpressionPointcutAdvisor.getAspectJExpressionPointcut().matches(bean.getClass())) {
-                    TargetSource targetSource = new TargetSource(bean, bean.getClass(), bean.getClass().getInterfaces());
-                    AdvisedSupport advisedSupport = new AdvisedSupport(targetSource, aspectJExpressionPointcutAdvisor.getMethodInterceptor(), aspectJExpressionPointcutAdvisor.getAspectJExpressionPointcut().getMethodMatcher());
-                    CglibAopProxy cglibAopProxy = new CglibAopProxy(advisedSupport);
-                    return cglibAopProxy.getProxy();
-                }
-            }
-        } else {
-            List<Object> list = autoWireCapableBeanFactory.getBeanByType(AspectJExpressionPointcutAdvisor.class);
-            for (Object object : list) {
-                AspectJExpressionPointcutAdvisor aspectJExpressionPointcutAdvisor = (AspectJExpressionPointcutAdvisor) object;
-                if (aspectJExpressionPointcutAdvisor.getAspectJExpressionPointcut().matches(bean.getClass())) {
-                    TargetSource targetSource = new TargetSource(bean, bean.getClass(), bean.getClass().getInterfaces());
-                    AdvisedSupport advisedSupport = new AdvisedSupport(targetSource, aspectJExpressionPointcutAdvisor.getMethodInterceptor(), aspectJExpressionPointcutAdvisor.getAspectJExpressionPointcut().getMethodMatcher());
-                    JdkDynamicAopProxy jdkDynamicAopProxy = new JdkDynamicAopProxy(advisedSupport);
-                    return jdkDynamicAopProxy.getProxy();
-                }
+        List<Object> list = autoWireCapableBeanFactory.getBeanByType(AspectJExpressionPointcutAdvisor.class);
+        for (Object object : list) {
+            AspectJExpressionPointcutAdvisor aspectJExpressionPointcutAdvisor = (AspectJExpressionPointcutAdvisor) object;
+            AspectJExpressionPointcut aspectJExpressionPointcut = aspectJExpressionPointcutAdvisor.getAspectJExpressionPointcut();
+            if (aspectJExpressionPointcut.matches(bean.getClass())) {
+                TargetSource targetSource = new TargetSource(bean, bean.getClass(), bean.getClass().getInterfaces());
+                ProxyFactory proxyFactory = new ProxyFactory(targetSource, aspectJExpressionPointcutAdvisor.getMethodInterceptor(), aspectJExpressionPointcut.getMethodMatcher());
+                return proxyFactory.getProxy();
             }
         }
         return bean;

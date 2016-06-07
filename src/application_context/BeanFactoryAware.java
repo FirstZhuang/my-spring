@@ -3,7 +3,7 @@ package application_context;
 import factory.BeanFactory;
 
 /**
- * 顶层接口，定义了对实现该接口的对象在赋值时所需要调用的方法
+ * Bean对IOC容器的感知，定义的方法可以在Bean中得到Bean所在的IOC容器，从而在Bean中直接使用IOC容器的服务
  * Created by MiaoZhuang on 2016/6/2.
  */
 public interface BeanFactoryAware {
